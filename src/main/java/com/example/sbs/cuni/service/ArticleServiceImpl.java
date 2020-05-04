@@ -17,4 +17,10 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> getArticles() {
 		return articleDao.getArticles();
 	}
+
+	@Override
+	public Article getArticle(int id) {
+		return articleDao.getArticle(id);
+	}
+
 }

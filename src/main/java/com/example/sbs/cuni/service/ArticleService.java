@@ -6,4 +6,7 @@ import com.example.sbs.cuni.dto.Article;
 
 public interface ArticleService {
 	List<Article> getArticles();
+
+	Article getArticle(int id);
+
 }

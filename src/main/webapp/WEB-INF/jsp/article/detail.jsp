@@ -2,16 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:set var="pageName" value="게시물 리스트" />
+<c:set var="pageName" value="게시물 상세" />
 <%@ include file="../part/head.jspf" %>
 
 <div class="con">
-	<c:forEach items="${articles}" var="article">
-		<section>
-			<a href="./detail?id=${article.id}">번호 : ${article.id}, 제목 : ${article.title}</a>
-		</section>
-		<hr>
-	</c:forEach>
+	<div>번호 : ${article.id}</div>
+	<div>제목 : ${article.title}</div>
 </div>
 
 <%@ include file="../part/foot.jspf" %>

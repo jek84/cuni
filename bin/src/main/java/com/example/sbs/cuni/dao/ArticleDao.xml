@@ -16,11 +16,4 @@
 		WHERE id
 		= #{id}
 	</select>
-	
-	<delete id="deleteArticle">
-		DELETE 
-		FROM article
-		WHERE id 
-		= #{id}
-	</delete>
 </mapper>

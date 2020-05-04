@@ -26,7 +26,3 @@ INSERT INTO article
 SET regDate = NOW(),
 title = '제목3',
 `body` = '내용3';
-
-/* MySQL 사용자 추가 */
--- GRANT ALL PRIVILEGES ON cuni.* TO sbsst@`%` IDENTIFIED BY 'sbs123414';
--- GRANT ALL PRIVILEGES ON cuni.* TO sbsst@`localhost` IDENTIFIED BY 'sbs123414';

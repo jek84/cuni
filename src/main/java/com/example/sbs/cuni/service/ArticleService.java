@@ -20,4 +20,6 @@ public interface ArticleService {
 	Map<String, Object> writeArticle(Map<String, Object> param);
 
 	Board getBoard(int boardId);
+
+	Map<String, Object> modifyArticle(Map<String, Object> param);
 }

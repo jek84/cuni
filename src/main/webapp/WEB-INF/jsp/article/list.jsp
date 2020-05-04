@@ -28,7 +28,9 @@
 					<td>${article.regDate}</td>
 					<td><a href="./detail?id=${article.id}">${article.title}</a></td>
 					<td><a href="./doDelete?id=${article.id}" 
-							onclick="if ( confirm('삭제하시겠습니까?') == false ) { return false; }">삭제</a></td>
+							onclick="if ( confirm('삭제하시겠습니까?') == false ) { return false; }">삭제</a>
+						<a href="./modify?id=${article.id}" >수정</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

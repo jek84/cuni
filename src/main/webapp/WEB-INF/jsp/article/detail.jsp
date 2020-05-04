@@ -5,9 +5,35 @@
 <c:set var="pageName" value="게시물 상세" />
 <%@ include file="../part/head.jspf" %>
 
-<div class="con">
-	<div>번호 : ${article.id}</div>
-	<div>제목 : ${article.title}</div>
+<div class="table-box con">
+	<table>
+		<colgroup>
+			<col width="180" />
+			<col width="" />
+		</colgroup>
+		<tbody>
+			<tr>
+				<th>번호</th>
+				<td>${article.id}</td>
+			</tr>
+			<tr>
+				<th>날짜</th>
+				<td>${article.regDate}</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>${article.title}</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>${article.body}</td>
+			</tr>
+			<tr>
+				<th>비고</th>
+				<td><a href="#">삭제</a></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <%@ include file="../part/foot.jspf" %>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.sbs.cuni.dto.Article;
+import com.example.sbs.cuni.dto.Board;
 import com.example.sbs.cuni.service.ArticleService;
 
 @Controller
@@ -18,9 +19,11 @@ public class ArticleController {
 	
 	@RequestMapping("article/list")
 	public String showList(Model model, String boardCode) {
+		Board board = articleService.getBoard(boardCode);
 		List<Article> articles = articleService.getArticles(boardCode);
 		
 		model.addAttribute("articles", articles);
+		model.addAttribute("board", board);
 		
 		return "article/list";
 	}

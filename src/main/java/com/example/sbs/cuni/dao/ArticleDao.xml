@@ -10,6 +10,12 @@
 		DESC
 	</select>
 
+	<select id="getBoardByBoardCode" resultType="Board">
+		SELECT *
+		FROM board
+		WHERE code = #{boardCode}
+	</select>
+
 	<select id="getArticlesByBoardCode" resultType="Article">
 		SELECT A.*
 		FROM
@@ -34,4 +40,5 @@
 		WHERE id 
 		= #{id}
 	</delete>
+
 </mapper>

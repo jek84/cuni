@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.sbs.cuni.dao.ArticleDao;
 import com.example.sbs.cuni.dto.Article;
 import com.example.sbs.cuni.dto.Board;
+import com.example.sbs.cuni.util.CUtil;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -45,5 +46,22 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Board getBoard(String boardCode) {
 		return articleDao.getBoardByBoardCode(boardCode);
+	}
+
+	@Override
+	public Map<String, Object> writeArticle(Map<String, Object> param) {
+		articleDao.writeArticle(param);
+		int id = CUtil.getAsInt(param.get("id"));
+		Map<String, Object> rs = new HashMap<>();
+		
+		rs.put("resultCode", "S-1");
+		rs.put("msg", String.format("%d번 게시물이 생성되었습니다.", id));
+		
+		return rs;
+	}
+
+	@Override
+	public Board getBoard(int boardId) {
+		return articleDao.getBoard(boardId);
 	}
 }

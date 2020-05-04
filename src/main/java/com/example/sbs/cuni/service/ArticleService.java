@@ -16,4 +16,8 @@ public interface ArticleService {
 	List<Article> getArticles(String boardCode);
 
 	Board getBoard(String boardCode);
+
+	Map<String, Object> writeArticle(Map<String, Object> param);
+
+	Board getBoard(int boardId);
 }

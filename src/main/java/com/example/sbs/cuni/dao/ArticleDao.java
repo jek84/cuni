@@ -15,4 +15,5 @@ public interface ArticleDao {
 
 	void deleteArticle(@Param("id") int id);
 
+	List<Article> getArticlesByBoardCode(@Param("boardCode") String boardCode);
 }

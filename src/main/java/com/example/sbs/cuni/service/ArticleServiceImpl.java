@@ -36,4 +36,8 @@ public class ArticleServiceImpl implements ArticleService {
 		return rs;
 	}
 
+	@Override
+	public List<Article> getArticles(String boardCode) {
+		return articleDao.getArticlesByBoardCode(boardCode);
+	}
 }

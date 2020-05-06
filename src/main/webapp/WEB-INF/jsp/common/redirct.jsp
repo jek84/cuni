@@ -3,15 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
-var alertMsg = '${alertMsg}'.trim();
-
-if ( alertMsg ) {
-	alert(alertMsg);
-}
-
-var locationReplaceUrl = '${locationReplace}'.trim();
-
-if ( locationReplaceUrl ) {
-	location.replace(locationReplaceUrl);
-}
+	var historyBack = '${historyBack}' == 'true';
+	
+	var alertMsg = '${alertMsg}'.trim();
+	
+	if ( alertMsg ) {
+		alert(alertMsg);
+	}
+	
+	if ( historyBack ) {
+		alert(historyBack);
+	}
+	
+	var locationReplaceUrl = '${locationReplace}'.trim();
+	
+	if ( locationReplaceUrl ) {
+		location.replace(locationReplaceUrl);
+	}
 </script>

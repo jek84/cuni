@@ -36,7 +36,7 @@ public class MemberController {
 		
 		String msg = (String) rs.get("msg");
 		
-		model.addAttribute("msg", msg);
+		model.addAttribute("alertMsg", msg);
 		
 		if (resultCode.startsWith("S-")) {
 			String redirectUrl = "/member/login";

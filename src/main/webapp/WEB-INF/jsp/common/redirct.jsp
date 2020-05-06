@@ -12,7 +12,7 @@
 	}
 	
 	if ( historyBack ) {
-		alert(historyBack);
+		history.back();
 	}
 	
 	var locationReplaceUrl = '${locationReplace}'.trim();

@@ -3,7 +3,7 @@ package com.example.sbs.cuni.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,20 +41,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("article/doDelete")
-	public String doDelete(Model model, int id, HttpSession session) {
-		int loginedMemberId = 0;
-		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		
-		if (loginedMemberId == 0) {
-			model.addAttribute("alertMsg", "로그인 후 이용해주세요.");
-			model.addAttribute("historyBack", true);
-			
-			return "common/redirct";
-		}
-		
+	public String doDelete(Model model, int id) {
 		Article article = articleService.getArticle(id);
 		
 		int boardId = article.getBoardId();
@@ -75,44 +62,19 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("article/write")
-	public String showWrite(Model model, String boardCode, HttpSession session) {
-		int loginedMemberId = 0;
-		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		
-		if (loginedMemberId == 0) {
-			model.addAttribute("alertMsg", "로그인 후 이용해주세요.");
-			model.addAttribute("historyBack", true);
-			
-			return "common/redirct";
-		}
+	public String showWrite(Model model, String boardCode, HttpServletRequest request) {
+		int loginedMemberId = (int) request.getAttribute("loginedMemberId");
 		
 		Board board = articleService.getBoard(boardCode);
 		
+		model.addAttribute("loginedMemberId", loginedMemberId);
 		model.addAttribute("board", board);
 		
 		return "article/write";
 	}
 	
 	@RequestMapping("article/doWrite")
-	public String doWrite(Model model, @RequestParam Map<String, Object> param, HttpSession session) {
-		int loginedMemberId = 0;
-		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		
-		if (loginedMemberId == 0) {
-			model.addAttribute("alertMsg", "로그인 후 이용해주세요.");
-			model.addAttribute("historyBack", true);
-			
-			return "common/redirct";
-		}
-		
-		param.put("memberId", loginedMemberId);
-		
+	public String doWrite(Model model, @RequestParam Map<String, Object> param) {
 		Map<String, Object> rs = articleService.writeArticle(param);
 		
 		int boardId = Integer.parseInt((String) param.get("boardId"));
@@ -129,20 +91,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("article/modify")
-	public String showModify(Model model, int id, HttpSession session) {
-		int loginedMemberId = 0;
-		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		
-		if (loginedMemberId == 0) {
-			model.addAttribute("alertMsg", "로그인 후 이용해주세요.");
-			model.addAttribute("historyBack", true);
-			
-			return "common/redirct";
-		}
-		
+	public String showModify(Model model, int id) {
 		Article article = articleService.getArticle(id);
 		
 		model.addAttribute("article", article);
@@ -151,20 +100,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("article/doModify")
-	public String doModify(Model model, @RequestParam Map<String, Object> param, HttpSession session) {
-		int loginedMemberId = 0;
-		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		
-		if (loginedMemberId == 0) {
-			model.addAttribute("alertMsg", "로그인 후 이용해주세요.");
-			model.addAttribute("historyBack", true);
-			
-			return "common/redirct";
-		}
-		
+	public String doModify(Model model, @RequestParam Map<String, Object> param) {
 		Map<String, Object> rs = articleService.modifyArticle(param);
 		
 		int id = Integer.parseInt((String) param.get("id"));

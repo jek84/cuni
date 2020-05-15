@@ -22,4 +22,8 @@ public interface ArticleService {
 	Board getBoard(int boardId);
 
 	Map<String, Object> modifyArticle(Map<String, Object> param);
+
+	Map<String, Object> getArticleModifyAbailable(int id, int loginedMemberId);
+
+	Map<String, Object> getArticleDeleteAbailable(int id, int loginedMemberId);
 }

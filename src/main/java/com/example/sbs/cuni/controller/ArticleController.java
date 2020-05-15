@@ -40,8 +40,66 @@ public class ArticleController {
 		return "article/detail";
 	}
 	
+	@RequestMapping("article/modify")
+	public String showModify(Model model, int id, HttpServletRequest request) {
+		int loginedMemberId = (int) request.getAttribute("loginedMemberId");
+		
+		Map<String, Object> articleModifyAvailableRs = articleService.getArticleModifyAbailable(id, loginedMemberId);
+		
+		if (((String) articleModifyAvailableRs.get("resultCode")).startsWith("F-")) {
+			model.addAttribute("alertMsg", articleModifyAvailableRs.get("msg"));
+			model.addAttribute("historyBack", true);
+			
+			return "common/redirct";
+		}
+		
+		Article article = articleService.getArticle(id);
+		
+		model.addAttribute("article", article);
+		
+		return "article/modify";
+	}
+	
+	@RequestMapping("article/doModify")
+	public String doModify(Model model, @RequestParam Map<String, Object> param, HttpServletRequest request) {
+		int loginedMemberId = (int) request.getAttribute("loginedMemberId");
+		
+		int id = Integer.parseInt((String) param.get("id"));
+		
+		Map<String, Object> articleModifyAvailableRs = articleService.getArticleModifyAbailable(id, loginedMemberId);
+		
+		if (((String) articleModifyAvailableRs.get("resultCode")).startsWith("F-")) {
+			model.addAttribute("alertMsg", articleModifyAvailableRs.get("msg"));
+			model.addAttribute("historyBack", true);
+			
+			return "common/redirct";
+		}
+		
+		Map<String, Object> rs = articleService.modifyArticle(param);
+		
+		
+		String msg = (String) rs.get("msg");
+		String redirectUrl = "/article/detail?id=" + id;
+		
+		model.addAttribute("alertMsg", msg);
+		model.addAttribute("locationReplace", redirectUrl);
+		
+		return "common/redirct";
+	}
+	
 	@RequestMapping("article/doDelete")
-	public String doDelete(Model model, int id) {
+	public String doDelete(Model model, int id, HttpServletRequest request) {
+		int loginedMemberId = (int) request.getAttribute("loginedMemberId");
+		
+		Map<String, Object> articleDeleteAvailableRs = articleService.getArticleDeleteAbailable(id, loginedMemberId);
+		
+		if (((String) articleDeleteAvailableRs.get("resultCode")).startsWith("F-")) {
+			model.addAttribute("alertMsg", articleDeleteAvailableRs.get("msg"));
+			model.addAttribute("historyBack", true);
+			
+			return "common/redirct";
+		}
+		
 		Article article = articleService.getArticle(id);
 		
 		int boardId = article.getBoardId();
@@ -92,27 +150,4 @@ public class ArticleController {
 		return "common/redirct";
 	}
 	
-	@RequestMapping("article/modify")
-	public String showModify(Model model, int id) {
-		Article article = articleService.getArticle(id);
-		
-		model.addAttribute("article", article);
-		
-		return "article/modify";
-	}
-	
-	@RequestMapping("article/doModify")
-	public String doModify(Model model, @RequestParam Map<String, Object> param) {
-		Map<String, Object> rs = articleService.modifyArticle(param);
-		
-		int id = Integer.parseInt((String) param.get("id"));
-		
-		String msg = (String) rs.get("msg");
-		String redirectUrl = "/article/detail?id=" + id;
-		
-		model.addAttribute("alertMsg", msg);
-		model.addAttribute("locationReplace", redirectUrl);
-		
-		return "common/redirct";
-	}
 }

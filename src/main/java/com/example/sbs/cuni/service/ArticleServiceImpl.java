@@ -76,4 +76,32 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return rs;
 	}
+
+	@Override
+	public Map<String, Object> getArticleModifyAbailable(int id, int actorMemberId) {
+		Article article = getArticle(id);
+		
+		Map<String, Object> rs = new HashMap<>();
+		
+		if (article.getMemberId() == actorMemberId) {
+			rs.put("resultCode", "S-1");
+			rs.put("msg", "수정권한이 있습니다.");
+		} else {
+			rs.put("resultCode", "F-1");
+			rs.put("msg", "수정권한이 없습니다.");
+		}
+		
+		return rs;
+	}
+
+	@Override
+	public Map<String, Object> getArticleDeleteAbailable(int id, int actorMemberId) {
+		Map<String, Object> rs = getArticleModifyAbailable(id, actorMemberId);
+		
+		String msg = (String) rs.get("msg");
+		msg = msg.replace("수정", "삭제");
+		rs.put("msg", msg);
+		
+		return rs;
+	}
 }
